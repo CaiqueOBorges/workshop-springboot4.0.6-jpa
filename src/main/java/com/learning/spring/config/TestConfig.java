@@ -1,6 +1,5 @@
 package com.learning.spring.config;
 
-import com.learning.spring.repositories.OrderItemRepository;
 import java.time.Instant;
 import java.util.Arrays;
 
@@ -12,10 +11,12 @@ import org.springframework.context.annotation.Profile;
 import com.learning.spring.entities.Category;
 import com.learning.spring.entities.Order;
 import com.learning.spring.entities.OrderItem;
+import com.learning.spring.entities.Payment;
 import com.learning.spring.entities.Product;
 import com.learning.spring.entities.User;
 import com.learning.spring.entities.enums.OrderStatus;
 import com.learning.spring.repositories.CategoryRepository;
+import com.learning.spring.repositories.OrderItemRepository;
 import com.learning.spring.repositories.OrderRepository;
 import com.learning.spring.repositories.ProductRepository;
 import com.learning.spring.repositories.UserRepository;
@@ -86,12 +87,11 @@ public class TestConfig implements CommandLineRunner{
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 		
 		
+		Payment pay1 = new Payment(null, Instant.parse("2026-04-20T21:53:07Z"), o1);
+		o1.setPayment(pay1);
 		
-
+		orderRepository.save(o1);
 		
-		
-		userRepository.saveAll(Arrays.asList(u1, u2));
-		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
 	}
 
 }
